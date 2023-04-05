@@ -58,10 +58,6 @@ def read_dataset(filename):
     
     return years_as_column_dataframe, country_as_column_dataframe
 
-years_as_column_dataframe, country_as_column_dataframe = \
-                                        read_dataset("data.csv")
-
-
 # This function explore the statistical properties of Co2 emissions
 def co2_emission():
     """
@@ -104,6 +100,24 @@ def co2_emission():
         decrease_axis -= 0.15
         year = int(year) + increase_year_by
     
+    # Calculate the mean, count, max of each year
+    co2_emission_df = co2_emission_df[["1966",
+                                       "1976",
+                                       "1986",
+                                       "1996",
+                                       "2006",
+                                       "2016"]].describe()
+    
+    # Calculate the covariance of the dataframe
+    co2_emission_df_covariance = co2_emission_df.cov()
+    
+    # Calculate the correlation of the dataframe
+    co2_emission_df_correlation = co2_emission_df.corr()
+    
+    print(co2_emission_df)
+    print(co2_emission_df_covariance)
+    print(co2_emission_df_correlation)
+
     # Identify ticks for the x-axis and customize the labels
     plt.xticks(country_column_axis, labels=countries, rotation=60, fontsize=11)
     plt.yticks(fontsize=11)
@@ -163,17 +177,38 @@ def urban_population():
         decrease_axis -= 0.15
         year = int(year) + increase_year_value
     
+    # Calculate the mean, count, max of each year
+    urban_population_df = urban_population_df[["1966",
+                                       "1976",
+                                       "1986",
+                                       "1996",
+                                       "2006",
+                                       "2016"]].describe()
+    
+    # Calculate the covariance of the dataframe
+    urban_population_df_covariance = urban_population_df.cov()
+    
+    # Calculate the correlation of the dataframe
+    urban_population_df_correlation = urban_population_df.corr()
+    
+    print(urban_population_df)
+    print(urban_population_df_covariance)
+    print(urban_population_df_correlation)
+    
     # Identify ticks for the x-axis and customize the labels
     plt.xticks(country_column_axis, labels=countries, rotation=80)
     plt.yticks(fontsize=11)
     
     # Labels for the x and y axis respectively
     plt.xlabel("Country Name", fontsize=12)
-    plt.ylabel("Urban Population", fontsize=12)
+    plt.ylabel("Population", fontsize=12)
     
     # Title of the plot and legend
     plt.title("Urban population of 10 countries", fontsize=14)
     plt.legend()
+    
+    # Save plot image
+    plt.savefig("Co2 Emission Bar Plot.jpg")
     
     # Display plot
     plt.show()
@@ -235,6 +270,24 @@ def arable_land():
         plt.plot(years, arable_land_df[countries[index]], 
                  marker='o', label=countries[index])
     
+    # Calculate the mean, count, max of each year
+    arable_land_df = arable_land_df[["1966",
+                                       "1976",
+                                       "1986",
+                                       "1996",
+                                       "2006",
+                                       "2016"]].describe()
+    
+    # Calculate the covariance of the dataframe
+    arable_land_df_covariance = arable_land_df.cov()
+    
+    # Calculate the correlation of the dataframe
+    arable_land_df_correlation = arable_land_df.corr()
+    
+    print(arable_land_df)
+    print(arable_land_df_covariance)
+    print(arable_land_df_correlation)
+    
     # Identify ticks for the x-axis and customize the labels
     plt.xticks(fontsize=11)
     plt.yticks(fontsize=11)
@@ -250,79 +303,6 @@ def arable_land():
     # Display plot
     plt.show()
 
-# Function to plot the forest area some countries 
-def forest_area():
-    """
-        This function explores the statistical properties and trends 
-        of Forest Area of some countries.
-    """
-    
-    # Call the read_dataset function and store its two return dataframe in 
-    # new variables
-    years_as_column_dataframe_, country_as_column_dataframe_ = read_dataset(
-                                                                "data.csv")
-    
-    # Local variable    
-    increase_year_value = 10
-    start_year = 1966
-    years = []
-    
-    # Select from the "Country Name" and "Indicator Name" index, the rows with 
-    # "Total population" and preferred countries
-    # in the countries list    
-    total_population_df = years_as_column_dataframe_.loc[(years_as_column_dataframe_\
-             .index.get_level_values(1) == 'Population, total')
-             &
-             years_as_column_dataframe_\
-                  .index.get_level_values(0).isin(countries)]
-    
-    # Set "Country Name" as the index of the datafreame.  
-    total_population_df = total_population_df.reset_index().set_index("Country Name")
-    
-    # Remove the "Indicator Name" column from the columns 
-    total_population_df = total_population_df.drop("Indicator Name", axis=1)
-    
-    # Transpose, reset the index and set the index of the dataframe
-    total_population_df = total_population_df.transpose().reset_index().\
-                        set_index("index")
-    
-    # Set the index name to Year
-    total_population_df.index.name = "Year"
-    
-    # Create a figure and modify the size of the plot
-    plt.figure(figsize=(10, 8))
-    
-    # This for-loop, loops 6 times add each year to the years list
-    for year_range in range(6):
-        years.append(str(start_year))
-        start_year += increase_year_value 
-    
-    # Get the years data needed from the "Population Total"
-    total_population_df = total_population_df.loc[total_population_df.index.\
-                                        get_level_values(0).isin(years)]
-    
-    # Loops 10 times and plot the line plot of the population
-    for index in range(10):
-        plt.plot(years, total_population_df[countries[index]], 
-                 marker='o', label=countries[index])
-    
-    # Identify ticks for the x-axis and customize the labels
-    plt.xticks(fontsize=11)
-    plt.yticks(fontsize=11)
-    
-    # Labels for the x and y axis respectively
-    plt.xlabel("Years", fontsize=12)
-    plt.ylabel("Population", fontsize=12)
-    
-    # Title of the plot and legend
-    plt.title("Population, total", fontsize=14)
-    plt.legend()
-    
-    # Display plot
-    plt.show()
-
-
 co2_emission()
 urban_population()
 arable_land()
-forest_area()
