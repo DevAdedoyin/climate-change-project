@@ -120,3 +120,6 @@ def co2_emission():
     plt.savefig("Co2 Emission Bar Plot.jpg")
         
     plt.show()
+
+
+#co2_emission()
