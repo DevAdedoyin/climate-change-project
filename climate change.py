@@ -8,7 +8,6 @@ Created on Tue Apr  4 22:24:06 2023
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-import seaborn as sns
 
 # Global Variable
 countries = ["Argentina", "Australia", "Brazil", "Canada", 
@@ -125,13 +124,20 @@ def co2_emission():
 
 # Function to explore the statistical properties of urban population
 def urban_population():
+    """
+        This function explores the statistical properties of the 
+        "Urban Population" indicator. 
+        It also plots a graph showing the Urban Population" for every 10 
+        years from 1966 to 2016.
+    """
+    
     # Call the read_dataset function and store its two return dataframe in 
     # new variables
     years_as_column_dataframe_, country_as_column_dataframe_ = read_dataset(
                                                                 "data.csv")
 
     # Select from the "Country Name" and "Indicator Name" index, the rows with 
-    # "Urban population growth (annual %)" and preferred countries
+    # "Urban population" and preferred countries
     # in the countries list
     urban_population_df = years_as_column_dataframe_\
         .loc[(years_as_column_dataframe_.index.get_level_values(1) == 
@@ -172,7 +178,151 @@ def urban_population():
     # Display plot
     plt.show()
 
+# Funtion to analyze arable land area of some countries
+def arable_land():
+    """
+        This function explores the statistical properties and trends 
+        of Arable land (% of land area). 
+    """
+    
+    # Call the read_dataset function and store its two return dataframe in 
+    # new variables
+    years_as_column_dataframe_, country_as_column_dataframe_ = read_dataset(
+                                                                "data.csv")
+    
+    # This for-loop, loops through both the number_of_women and labels list 
+    # and plots out each line in the plot    
+    increase_year_value = 10
+    start_year = 1966
+    years = []
+    
+    # Select from the "Country Name" and "Indicator Name" index, the rows with 
+    # "Urban population growth (annual %)" and preferred countries
+    # in the countries list    
+    arable_land_df = years_as_column_dataframe_.loc[(years_as_column_dataframe_\
+             .index.get_level_values(1) == 'Arable land (% of land area)')
+             &
+             years_as_column_dataframe_\
+                  .index.get_level_values(0).isin(countries)]
+    
+    # Set "Country Name" as the index of the datafreame.  
+    arable_land_df = arable_land_df.reset_index().set_index("Country Name")
+    
+    # Remove the "Indicator Name" column from the columns 
+    arable_land_df = arable_land_df.drop("Indicator Name", axis=1)
+    
+    # Transpose, reset the index and set the index of the dataframe
+    arable_land_df = arable_land_df.transpose().reset_index().\
+                        set_index("index")
+    
+    # Set the index name to Year
+    arable_land_df.index.name = "Year"
+    
+    # Create a figure and modify the size of the plot
+    plt.figure(figsize=(10, 8))
+    
+    # This for-loop, loops 6 times add each year to the years list
+    for year_range in range(6):
+        years.append(str(start_year))
+        start_year += increase_year_value 
+    
+    # Get the years data needed from the "arable land dataframe"
+    arable_land_df = arable_land_df.loc[arable_land_df.index.\
+                                        get_level_values(0).isin(years)]
+    
+    # Loops 10 times and plot the line plot of the arable land area
+    for index in range(10):
+        plt.plot(years, arable_land_df[countries[index]], 
+                 marker='o', label=countries[index])
+    
+    # Identify ticks for the x-axis and customize the labels
+    plt.xticks(fontsize=11)
+    plt.yticks(fontsize=11)
+    
+    # Labels for the x and y axis respectively
+    plt.xlabel("Years", fontsize=12)
+    plt.ylabel("Percentage land area", fontsize=12)
+    
+    # Title of the plot and legend
+    plt.title("Arable land (% of land area)", fontsize=14)
+    plt.legend()
+    
+    # Display plot
+    plt.show()
+
+# Function to plot the forest area some countries 
+def forest_area():
+    """
+        This function explores the statistical properties and trends 
+        of Forest Area of some countries.
+    """
+    
+    # Call the read_dataset function and store its two return dataframe in 
+    # new variables
+    years_as_column_dataframe_, country_as_column_dataframe_ = read_dataset(
+                                                                "data.csv")
+    
+    # Local variable    
+    increase_year_value = 10
+    start_year = 1966
+    years = []
+    
+    # Select from the "Country Name" and "Indicator Name" index, the rows with 
+    # "Total population" and preferred countries
+    # in the countries list    
+    total_population_df = years_as_column_dataframe_.loc[(years_as_column_dataframe_\
+             .index.get_level_values(1) == 'Population, total')
+             &
+             years_as_column_dataframe_\
+                  .index.get_level_values(0).isin(countries)]
+    
+    # Set "Country Name" as the index of the datafreame.  
+    total_population_df = total_population_df.reset_index().set_index("Country Name")
+    
+    # Remove the "Indicator Name" column from the columns 
+    total_population_df = total_population_df.drop("Indicator Name", axis=1)
+    
+    # Transpose, reset the index and set the index of the dataframe
+    total_population_df = total_population_df.transpose().reset_index().\
+                        set_index("index")
+    
+    # Set the index name to Year
+    total_population_df.index.name = "Year"
+    
+    # Create a figure and modify the size of the plot
+    plt.figure(figsize=(10, 8))
+    
+    # This for-loop, loops 6 times add each year to the years list
+    for year_range in range(6):
+        years.append(str(start_year))
+        start_year += increase_year_value 
+    
+    # Get the years data needed from the "Population Total"
+    total_population_df = total_population_df.loc[total_population_df.index.\
+                                        get_level_values(0).isin(years)]
+    
+    # Loops 10 times and plot the line plot of the population
+    for index in range(10):
+        plt.plot(years, total_population_df[countries[index]], 
+                 marker='o', label=countries[index])
+    
+    # Identify ticks for the x-axis and customize the labels
+    plt.xticks(fontsize=11)
+    plt.yticks(fontsize=11)
+    
+    # Labels for the x and y axis respectively
+    plt.xlabel("Years", fontsize=12)
+    plt.ylabel("Population", fontsize=12)
+    
+    # Title of the plot and legend
+    plt.title("Population, total", fontsize=14)
+    plt.legend()
+    
+    # Display plot
+    plt.show()
 
 
 co2_emission()
 urban_population()
+arable_land()
+forest_area()
