@@ -63,7 +63,7 @@ years_as_column_dataframe, country_as_column_dataframe = \
                                         read_dataset("data.csv")
 
 
-# This function explore the statistical proper
+# This function explore the statistical properties of Co2 emissions
 def co2_emission():
     """
         This function explores the statistical properties of the 
@@ -117,9 +117,62 @@ def co2_emission():
     plt.title("CO2 emissions from liquid fuel consumption (kt)", fontsize=14)
     plt.legend()
     
+    # Save plot image
     plt.savefig("Co2 Emission Bar Plot.jpg")
-        
+    
+    # Display plot
+    plt.show()
+
+# Function to explore the statistical properties of urban population
+def urban_population():
+    # Call the read_dataset function and store its two return dataframe in 
+    # new variables
+    years_as_column_dataframe_, country_as_column_dataframe_ = read_dataset(
+                                                                "data.csv")
+
+    # Select from the "Country Name" and "Indicator Name" index, the rows with 
+    # "Urban population growth (annual %)" and preferred countries
+    # in the countries list
+    urban_population_df = years_as_column_dataframe_\
+        .loc[(years_as_column_dataframe_.index.get_level_values(1) == 
+              'Urban population') & years_as_column_dataframe_\
+                  .index.get_level_values(0).isin(countries)]
+    
+    # Generate an evenly spaced array with length of the countries list
+    country_column_axis = np.arange(len(countries)) 
+    
+    # Create a figure and modify the size of the plot
+    plt.figure(figsize=(10, 6))
+    
+    # Local variables 
+    year = 1966
+    increase_year_value = 10
+    decrease_axis = 0.45
+    
+    # This for-loop, loops 6 times and plots the bar graph in group of years
+    for _range in range(6): 
+        year = str(year)
+        plt.bar(country_column_axis - decrease_axis, urban_population_df[year], 
+                0.15, label=year)
+        decrease_axis -= 0.15
+        year = int(year) + increase_year_value
+    
+    # Identify ticks for the x-axis and customize the labels
+    plt.xticks(country_column_axis, labels=countries, rotation=80)
+    plt.yticks(fontsize=11)
+    
+    # Labels for the x and y axis respectively
+    plt.xlabel("Country Name", fontsize=12)
+    plt.ylabel("Urban Population", fontsize=12)
+    
+    # Title of the plot and legend
+    plt.title("Urban population of 10 countries", fontsize=14)
+    plt.legend()
+    
+    # Display plot
     plt.show()
 
 
-#co2_emission()
+
+co2_emission()
+urban_population()
