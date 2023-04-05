@@ -8,6 +8,8 @@ Created on Tue Apr  4 22:24:06 2023
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import scipy.stats as stats
+import numpy as np
 
 # Global Variable
 countries = ["Argentina", "Australia", "Brazil", "Canada", 
@@ -101,12 +103,14 @@ def co2_emission():
         year = int(year) + increase_year_by
     
     # Calculate the mean, count, max of each year
-    co2_emission_df = co2_emission_df[["1966",
+    co2_emission_df_desc = co2_emission_df[["1966",
                                        "1976",
                                        "1986",
                                        "1996",
                                        "2006",
                                        "2016"]].describe()
+    
+    
     
     # Calculate the covariance of the dataframe
     co2_emission_df_covariance = co2_emission_df.cov()
@@ -114,10 +118,42 @@ def co2_emission():
     # Calculate the correlation of the dataframe
     co2_emission_df_correlation = co2_emission_df.corr()
     
-    print(co2_emission_df)
-    print(co2_emission_df_covariance)
-    print(co2_emission_df_correlation)
+    print("Descibe:", co2_emission_df_desc)
+    print("Covariance:", co2_emission_df_covariance)
+    print("Correlation:", co2_emission_df_correlation)
 
+    # Calculate the mean 
+    mean = np.mean(co2_emission_df[["1966",
+                                       "1976",
+                                       "1986",
+                                       "1996",
+                                       "2006",
+                                       "2016"]])
+    print("Mean:", mean)
+    
+    # Calculate the standard deviation
+    std = np.std(co2_emission_df[["1966",
+                                       "1976",
+                                       "1986",
+                                       "1996",
+                                       "2006",
+                                       "2016"]])
+    print("Std. deviation:", std)
+    
+    # Skewness and Kurtosis of the dataframe
+    print("Skew:", stats.skew(co2_emission_df[["1966",
+                                       "1976",
+                                       "1986",
+                                       "1996",
+                                       "2006",
+                                       "2016"]]))
+    print("Kurtosis", stats.kurtosis(co2_emission_df[["1966",
+                                       "1976",
+                                       "1986",
+                                       "1996",
+                                       "2006",
+                                       "2016"]]))
+    
     # Identify ticks for the x-axis and customize the labels
     plt.xticks(country_column_axis, labels=countries, rotation=60, fontsize=11)
     plt.yticks(fontsize=11)
@@ -195,6 +231,38 @@ def urban_population():
     print(urban_population_df_covariance)
     print(urban_population_df_correlation)
     
+    # Calculate the mean 
+    mean = np.mean(urban_population_df[["1966",
+                                       "1976",
+                                       "1986",
+                                       "1996",
+                                       "2006",
+                                       "2016"]])
+    print("Mean:", mean)
+    
+    # Calculate the standard deviation
+    std = np.std(urban_population_df[["1966",
+                                       "1976",
+                                       "1986",
+                                       "1996",
+                                       "2006",
+                                       "2016"]])
+    print("Std. deviation:", std)
+    
+    # Skewness and Kurtosis of the dataframe
+    print("Skew:", stats.skew(urban_population_df[["1966",
+                                       "1976",
+                                       "1986",
+                                       "1996",
+                                       "2006",
+                                       "2016"]]))
+    print("Kurtosis", stats.kurtosis(urban_population_df[["1966",
+                                       "1976",
+                                       "1986",
+                                       "1996",
+                                       "2006",
+                                       "2016"]]))
+    
     # Identify ticks for the x-axis and customize the labels
     plt.xticks(country_column_axis, labels=countries, rotation=80)
     plt.yticks(fontsize=11)
@@ -269,24 +337,6 @@ def arable_land():
     for index in range(10):
         plt.plot(years, arable_land_df[countries[index]], 
                  marker='o', label=countries[index])
-    
-    # Calculate the mean, count, max of each year
-    arable_land_df = arable_land_df[["1966",
-                                       "1976",
-                                       "1986",
-                                       "1996",
-                                       "2006",
-                                       "2016"]].describe()
-    
-    # Calculate the covariance of the dataframe
-    arable_land_df_covariance = arable_land_df.cov()
-    
-    # Calculate the correlation of the dataframe
-    arable_land_df_correlation = arable_land_df.corr()
-    
-    print(arable_land_df)
-    print(arable_land_df_covariance)
-    print(arable_land_df_correlation)
     
     # Identify ticks for the x-axis and customize the labels
     plt.xticks(fontsize=11)
