@@ -1,9 +1,9 @@
 # Climate Change Statistics and Trends
 
-#Climate change data analysis based on World Bank data
+# Climate change data analysis based on World Bank data
 For the purpose of analysing statistical trends, three indicators on climate change were chosen across 10 countries. The chosen indicators are CO2 emissions from liquid fuel consumption (kt), Urban population, Arable land (% of land area). The countries chosen are Argentina, Australia, Brazil, Canada, China, United Kingdom, Ghana, India, Nigeria, and United States.
 
-#C02 emissions from liquid fuel consumption vs Urban Population
+# C02 emissions from liquid fuel consumption vs Urban Population
 ![climate](https://github.com/DevAdedoyin/climate-change-project/assets/59482569/2877b659-b3f4-4e2c-95f5-c6b2869cda5c)
 
 The plot above, is a plot that shows the rate of “C02 emissions from liquid fuel consumption (kt)” across 10 different countries, from diverse region, and from the year 1966 to 2016 in a gap 10 years each. The plot shows that the United States is the highest consumer of liquid fuel among the ten countries.
@@ -16,7 +16,7 @@ Increase in population, most times tend to come with an increase in the consumpt
 
 Also, it can be seen that as the Urban population of India increases, so does the rate of C02 emissions from liquid fuel consumption increases.
 
-#Arable land(% of land area) vs Urban Population
+# Arable land(% of land area) vs Urban Population
 ![climate2](https://github.com/DevAdedoyin/climate-change-project/assets/59482569/e936daf6-0283-41b8-a96b-297b2f40554f)
 
 Arable land are lands that are apt for cultivating crops. It comprises of land that is being used for agricultural purposes as well as land that could be transformed to farm use.
@@ -31,8 +31,8 @@ Also from the plots, it can be seen that a country like China which is higher in
 
 In addition, urbanization creates opportunities for agriculture. For example, as a country increases in urban population, it creates opportunities for farmers to sell there farm produce. Urban areas generate high amount of organic waste, which is being used as a fertilizer for agricultural crops.
 
-#CREDITS
-Please, if you're going to use any part of this write up or project ensure you give credit to Adedoyin Idris
+# CREDITS
+# Please, if you're going to use any part of this write up or project ensure you give credit to Adedoyin Idris
 
 Thanks.
 Kind regards.
