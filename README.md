@@ -32,7 +32,7 @@ Also from the plots, it can be seen that a country like China which is higher in
 In addition, urbanization creates opportunities for agriculture. For example, as a country increases in urban population, it creates opportunities for farmers to sell there farm produce. Urban areas generate high amount of organic waste, which is being used as a fertilizer for agricultural crops.
 
 # CREDITS
-# Please, if you're going to use any part of this write up or project ensure you give credit to Adedoyin Idris
+# Please, if you are going to use any part of this write-up or project, make sure you give credit to Adedoyin Idris
 
 Thanks.
 Kind regards.
